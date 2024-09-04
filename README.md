@@ -6,8 +6,8 @@ You can either download the newest offline release of the patchers HTML on this 
 
 Modder Plaza invite link:
 
-https://classroom.google.com/c/NjkwNDM4NTE1NTcz?cjc=r7rnmbu
+https://classroom.google.com/c/NjkwNDM4NTE1NTcz?cjc=tgv62er
 
 Modder Plaza class code:
 
-r7rnmbu
+tgv62er
