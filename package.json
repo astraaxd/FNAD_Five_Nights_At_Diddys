@@ -13,4 +13,7 @@
   "engines": {
     "node": ">=14.x"
   }
+  "scripts": {
+  "build": "npx puppeteer install && your-build-command"
+}
 }
