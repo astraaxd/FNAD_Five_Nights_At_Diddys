@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "puppeteer-extra": "^3.2.1",
-    "puppeteer-extra-plugin-stealth": "^2.8.3"
+    "puppeteer-core": "^20.0.0",
+    "chrome-aws-lambda": "^10.1.0"
   },
   "engines": {
     "node": ">=14.x"

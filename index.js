@@ -1,5 +1,6 @@
 const express = require('express');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
+const chromium = require('chrome-aws-lambda');
 
 const app = express();
 
@@ -13,7 +14,11 @@ app.use('/proxy', async (req, res) => {
     }
 
     try {
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({
+            args: chromium.args,
+            executablePath: await chromium.executablePath,
+            headless: chromium.headless,
+        });
         const page = await browser.newPage();
 
         await page.setRequestInterception(true);
@@ -22,11 +27,13 @@ app.use('/proxy', async (req, res) => {
         });
 
         await page.goto(targetUrl, { waitUntil: 'networkidle2' });
+
         const content = await page.content();
         await browser.close();
 
         res.send(content);
     } catch (err) {
+        console.error(err);
         res.status(500).send('Error: ' + err.message);
     }
 });
@@ -88,7 +95,7 @@ app.get('/', (req, res) => {
                 .patcher-iframe-container {
                     margin-top: 20px;
                     width: 100%;
-                    height: 60vh; /* Adjusted height */
+                    height: 60vh;
                     overflow: hidden;
                     border: 2px solid #ccc;
                     border-radius: 8px;
@@ -127,7 +134,7 @@ app.get('/', (req, res) => {
                     <p style="font-size: 0.99em;">All trademarks, service marks, and trade names are the property of their respective owners.</p>
                     <p style="font-size: 0.99em;">Disclaimer: The content provided on this site is for informational purposes only. I, Astraa, makes no representations or warranties of any kind regarding the accuracy or completeness of the content and shall not be liable for any damages arising from the use of or reliance on such content.</p>
                     <p style="color: red; font-size: 0.99em;">Please be aware that using this site to bypass network restrictions, such as those implemented by educational institutions, is done at your own risk. I, Astraa, assume no responsibility for any trouble, disciplinary actions, or legal consequences resulting from such use. Use this site responsibly and at your own discretion.</p>
-                    <a>For school administrators: If you want me (Astraa) to take this exploit down, please contact me at the Email above. Although, I probably wont do anything about it nor take it down, since its insanely funny to play fortnite on school computers. :D</a>
+                    <a>For school administrators: If you want me (Astraa) to take this exploit down, please contact me at the Email above. Although, I probably wont do anything about it nor take it down, since its insanely funny to play fortnite on school computers and its also fairly simple for one of your students to reupload the offline file to the cloud, and access it there.</a>
                 </footer>
             </div>
             <script>
