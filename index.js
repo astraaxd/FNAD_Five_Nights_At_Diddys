@@ -1,6 +1,5 @@
 const express = require('express');
-const puppeteer = require('puppeteer-core');
-const chromium = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer');
 
 const app = express();
 
@@ -8,32 +7,23 @@ app.use(express.static('public'));
 
 app.use('/proxy', async (req, res) => {
     const targetUrl = req.query.url;
-
     if (!targetUrl) {
         return res.status(400).send('Error: Please provide a URL.');
     }
-
     try {
-        const browser = await puppeteer.launch({
-            args: chromium.args,
-            executablePath: await chromium.executablePath,
-            headless: chromium.headless,
-        });
+        const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
 
         await page.setRequestInterception(true);
         page.on('request', (request) => {
             request.continue();
         });
-
         await page.goto(targetUrl, { waitUntil: 'networkidle2' });
-
         const content = await page.content();
         await browser.close();
 
         res.send(content);
     } catch (err) {
-        console.error(err);
         res.status(500).send('Error: ' + err.message);
     }
 });
@@ -95,7 +85,7 @@ app.get('/', (req, res) => {
                 .patcher-iframe-container {
                     margin-top: 20px;
                     width: 100%;
-                    height: 60vh;
+                    height: 60vh; /* Adjusted height */
                     overflow: hidden;
                     border: 2px solid #ccc;
                     border-radius: 8px;
