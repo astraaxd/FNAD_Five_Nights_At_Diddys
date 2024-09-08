@@ -1,8 +1,5 @@
 const express = require('express');
-const puppeteer = require('puppeteer-extra');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-
-puppeteer.use(StealthPlugin());
+const puppeteer = require('puppeteer');
 
 const app = express();
 
@@ -90,26 +87,17 @@ app.get('/', (req, res) => {
                 }
                 .patcher-iframe-container {
                     margin-top: 20px;
-                    width: 80%; /* Reduced width */
-                    height: 40vh; /* Reduced height */
+                    width: 100%;
+                    height: 60vh; /* Adjusted height */
                     overflow: hidden;
                     border: 2px solid #ccc;
                     border-radius: 8px;
                     background: #fff;
-                    margin-left: auto;
-                    margin-right: auto;
                 }
                 .patcher-iframe {
                     width: 100%;
                     height: 100%;
                     border: none;
-                }
-                footer {
-                    margin-top: 20px;
-                    font-size: 0.99em;
-                }
-                footer a {
-                    color: #ccc;
                 }
             </style>
         </head>
@@ -133,13 +121,13 @@ app.get('/', (req, res) => {
                 <div id="results-container"></div>
                 <div id="log-container"></div>
                 <footer>
-                    <p>&copy; 2024 Astraa Dev. All rights reserved.</p>
-                    <p>This website and its content, including but not limited to text, images, and code, are the intellectual property of me (Astraa) and are protected by copyright law. Unauthorized use, reproduction, or distribution of any content from this site without express written permission is strictly prohibited.</p>
-                    <p>For more information or permission requests, please contact us at <a href="mailto:AstraaDev.Production@gmail.com">AstraaDev.Production@gmail.com</a>.</p>
-                    <p>All trademarks, service marks, and trade names are the property of their respective owners.</p>
-                    <p>Disclaimer: The content provided on this site is for informational purposes only. I, Astraa, makes no representations or warranties of any kind regarding the accuracy or completeness of the content and shall not be liable for any damages arising from the use of or reliance on such content.</p>
-                    <p style="color: red;">Please be aware that using this site to bypass network restrictions, such as those implemented by educational institutions, is done at your own risk. I, Astraa, assume no responsibility for any trouble, disciplinary actions, or legal consequences resulting from such use. Use this site responsibly and at your own discretion.</p>
-                    <a>For school administrators: If you want me (Astraa) to take this exploit down, please contact me at the Email above. Although, I probably won't do anything about it nor take it down, since it's insanely funny to play fortnite on school computers and it's also fairly simple for one of your students to reupload the offline file to the cloud, and access it there.</a>
+                    <p style="font-size: 0.99em;">&copy; 2024 Astraa Dev. All rights reserved.</p>
+                    <p style="font-size: 0.99em;">This website and its content, including but not limited to text, images, and code, are the intellectual property of me (Astraa) and are protected by copyright law. Unauthorized use, reproduction, or distribution of any content from this site without express written permission is strictly prohibited.</p>
+                    <p style="font-size: 0.99em;">For more information or permission requests, please contact us at <a href="mailto:AstraaDev.Production@gmail.com">AstraaDev.Production@gmail.com</a>.</p>
+                    <p style="font-size: 0.99em;">All trademarks, service marks, and trade names are the property of their respective owners.</p>
+                    <p style="font-size: 0.99em;">Disclaimer: The content provided on this site is for informational purposes only. I, Astraa, makes no representations or warranties of any kind regarding the accuracy or completeness of the content and shall not be liable for any damages arising from the use of or reliance on such content.</p>
+                    <p style="color: red; font-size: 0.99em;">Please be aware that using this site to bypass network restrictions, such as those implemented by educational institutions, is done at your own risk. I, Astraa, assume no responsibility for any trouble, disciplinary actions, or legal consequences resulting from such use. Use this site responsibly and at your own discretion.</p>
+                    <a>For school administrators: If you want me (Astraa) to take this exploit down, please contact me at the Email above. Although, I probably wont do anything about it nor take it down, since its insanely funny to play fortnite on school computers. :D</a>
                 </footer>
             </div>
             <script>
@@ -157,7 +145,7 @@ app.get('/', (req, res) => {
     `);
 });
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
