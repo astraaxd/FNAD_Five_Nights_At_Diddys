@@ -1,3 +1,2 @@
 # FNAD
-
-cool diddy pedo game woah on chromebooks web
+super uh cool fnaf fangame on html and javascript that makes it so u can uh escape diddy!!!!!!!!
